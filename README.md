@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+<p align="center"><img width='200px' src="https://user-images.githubusercontent.com/24623403/193721398-c6bb6f0d-859e-4601-9057-f063bfbb82f5.png"></p>
+<p align='center'>
+  <img src='https://img.shields.io/github/package-json/v/Endless-Creation-32nd/hipSpot-toyproject-frontend'>
+  <a href="https://github.com/Endless-Creation-32nd/hipSpot-toyproject-frontend/issues"><img src='https://img.shields.io/github/issues/Endless-Creation-32nd/hipSpot-toyproject-frontend'></a>
+ <a href="https://github.com/Endless-Creation-32nd/hipSpot-toyproject-frontend/graphs/contributors"><img src='https://img.shields.io/github/contributors/Endless-Creation-32nd/hipSpot-toyproject-frontend'></a>
+ <a href='https://github.com/Endless-Creation-32nd/hipSpot-toyproject-frontend/blob/main/LICENSE'><img src='https://img.shields.io/github/license/Endless-Creation-32nd/hipSpot-toyproject-frontend'></a>
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# TodoList 토이 프로젝트
 
-## Available Scripts
+Hipspot 프로젝트를 진행하기 전 팀원들과 간단히 협업해봅니다.
 
-In the project directory, you can run:
+## Skills
 
-### `npm start`
+- msw
+- recoil
+- axios
+- styled-components
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Mocking Apis
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| 구분          | 도메인 | uri       | method | body | response |
+| ------------- | ------ | --------- | ------ | ---- | -------- |
+| 투두 추가     | Todo   | /todo     | POST   | Todo | Todo     |
+| 투두목록 조회 | Todo   | /todo     | GET    | null | Todo[]   |
+| 투두 조회     | Todo   | /todo/:id | GET    | null | Todo     |
+| 투두 수정     | Todo   | /todo/:id | PATCH  | Todo | Todo     |
+| 투두 삭제     | Todo   | /todo/:id | DELETE | null | null     |
 
-### `npm test`
+### Response Type
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```ts
+type Todo = {
+  id: number;
+  title: string;
+  content: string;
+  created_at: Date;
+  status: "todo" | "done";
+  tag: Tag[];
+};
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+type Tag = "기획" | "디자인" | "개발" | "FE" | "BE" | "iOS" | "AOS";
+```
