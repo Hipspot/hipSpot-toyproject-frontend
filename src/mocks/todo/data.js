@@ -12,7 +12,7 @@ export default [
     title: "목 데이터 title 2",
     content: "목 데이터 content 2",
     created_at: "2022-10-04T00:40:12.345Z",
-    status: "doing",
+    status: "todo",
     tag: ["기획", "디자인"],
   },
   {

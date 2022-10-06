@@ -23,9 +23,19 @@ function App() {
       title: "title",
       content: "content",
       created_at: new Date().toISOString(),
-      status: "done",
+      status: "todo",
       tag: ["개발", "FE"],
     });
+    await getTodoList();
+  };
+
+  const toggleTodo = async (id) => {
+    await todoApi.toggleTodo({ id });
+    await getTodoList();
+  };
+
+  const deleteTodo = async (id) => {
+    await todoApi.deleteTodo({ id });
     await getTodoList();
   };
 
@@ -42,6 +52,8 @@ function App() {
             <div key={i.id}>
               <h1>{i.title}</h1>
               <p>{i.content}</p>
+              <button onClick={() => toggleTodo(i.id)}>{i.status}</button>
+              <button onClick={() => deleteTodo(i.id)}>삭제</button>
             </div>
           ))}
       </div>
