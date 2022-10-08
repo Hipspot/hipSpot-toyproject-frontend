@@ -1,17 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from "recoil";
+import { useRecoilState } from "recoil";
+import todoListState from "./recoil/atom";
 import * as todoApi from "./apis/todo";
 import GlobalStyle from "./GlobalStyle";
 
 function App() {
-  const [data, setData] = useState();
+  const [data, setData] = useRecoilState(todoListState);
   const [datum, setDatum] = useState();
   const [count, setCount] = useState(0);
 
@@ -60,7 +55,7 @@ function App() {
   }, []);
 
   return (
-    <RecoilRoot>
+    <>
       <GlobalStyle />
       <div className="App">
         {data &&
@@ -91,7 +86,7 @@ function App() {
           </div>
         ) : null}
       </div>
-    </RecoilRoot>
+    </>
   );
 }
 
