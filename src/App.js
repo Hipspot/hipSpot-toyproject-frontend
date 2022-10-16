@@ -1,58 +1,36 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import todoListState from "./recoil/atom";
-import * as todoApi from "./apis/todo";
+import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import todoListAtom from "./recoil/todoListAtom";
 import GlobalStyle from "./GlobalStyle";
+import useRefreshTodoList from "./hooks/useRefreshTodoList";
+import useCreateTodo from "./hooks/useCreateTodo";
+import useEditTodo from "./hooks/useEditTodo";
+import useToggleTodo from "./hooks/useToggleTodo";
+import useDeLeteTodo from "./hooks/useDeleteTodo";
+import todoWithId from "./recoil/todoWithId";
+import todosWithTags from "./recoil/todosWithTags";
+import todosWithDate from "./recoil/todosWithData";
 
 function App() {
-  const [data, setData] = useRecoilState(todoListState);
-  const [datum, setDatum] = useState();
-  const [count, setCount] = useState(0);
+  const data = useRecoilValue(todoListAtom);
+  const [num, setNum] = useState(0);
+  const getTodo = useRecoilValue(todoWithId(num));
+  const [tags, setTags] = useState([]);
+  const getTodosWithTags = useRecoilValue(todosWithTags(tags));
+  const getTodosWithDate = useRecoilValue(
+    todosWithDate(["2022-10-04", "2022-10-25"])
+  );
+  console.log(getTodo);
 
-  const getTodoList = async () => {
-    const response = await todoApi.getTodoList();
-    setData(response);
-  };
+  const refreshTodoList = useRefreshTodoList();
 
-  const createTodo = async () => {
-    await todoApi.createTodo({
-      title: "title",
-      content: "content",
-      created_at: new Date().toISOString(),
-      status: "todo",
-      tag: ["개발", "FE"],
-    });
-    await getTodoList();
-  };
+  const createTodo = useCreateTodo();
 
-  const getTodo = async (id) => {
-    const response = await todoApi.getTodo(id);
-    setDatum(response);
-    await getTodoList();
-  };
+  const editTodo = useEditTodo();
 
-  const editTodo = async (id) => {
-    const target = { ...data.find((todo) => todo.id === id) };
-    target.title = `${id}번 투두의 수정한 제목`;
-    target.content = `${id}번 투두의 수정한 내용`;
-    await todoApi.editTodo(target);
-    await getTodoList();
-  };
+  const toggleTodo = useToggleTodo();
 
-  const toggleTodo = async (id) => {
-    await todoApi.toggleTodo(id);
-    await getTodoList();
-  };
-
-  const deleteTodo = async (id) => {
-    await todoApi.deleteTodo(id);
-    await getTodoList();
-  };
-
-  useEffect(() => {
-    getTodoList();
-  }, []);
+  const deleteTodo = useDeLeteTodo();
 
   return (
     <>
@@ -63,29 +41,40 @@ function App() {
             <div key={i.id}>
               <h1>{i.title}</h1>
               <p>{i.content}</p>
+              <p>{i.tag}</p>
+
               <button onClick={() => toggleTodo(i.id)}>{i.status}</button>
               <button onClick={() => deleteTodo(i.id)}>삭제</button>
-              <button onClick={() => editTodo(i.id)}>수정</button>
+              <button
+                onClick={() =>
+                  editTodo(i.id, "edit title", "edit content", ["FE", "BE"])
+                }
+              >
+                수정
+              </button>
             </div>
           ))}
       </div>
 
-      <button onClick={createTodo}>투두 추가</button>
+      <button
+        onClick={() =>
+          createTodo("new todo title", "new todo content", ["개발", "FE"])
+        }
+      >
+        투두 추가
+      </button>
 
-      <div>
-        <button onClick={() => setCount(count - 1)}>-</button>
-        <button onClick={() => getTodo(count)}>{count}번 투두 가져오기</button>
-        <button onClick={() => setCount(count + 1)}>+</button>
-        {datum ? (
-          <div>
-            <h1>{datum.title}</h1>
-            <p>{datum.content}</p>
-            <button onClick={() => toggleTodo(datum.id)}>{datum.status}</button>
-            <button onClick={() => deleteTodo(datum.id)}>삭제</button>
-            <button onClick={() => editTodo(datum.id)}>수정</button>
-          </div>
-        ) : null}
-      </div>
+      <button onClick={refreshTodoList}>투두리스트 새로고침</button>
+      <p>selector todoWithId: {getTodo.title}</p>
+      <button onClick={() => setNum(num + 1)}>todoWithId id++</button>
+      <p>
+        selector todosWithTags: {getTodosWithTags.map((todo) => todo.title)}
+      </p>
+      <button onClick={() => setTags(["개발"])}>todosWithTags "개발"</button>
+      <button onClick={() => setTags(["FE", "개발"])}>
+        todosWithTags "FE", "개발"
+      </button>
+      {getTodosWithDate.map((todo) => todo.title)}
     </>
   );
 }

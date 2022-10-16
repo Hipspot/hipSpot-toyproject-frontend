@@ -18,13 +18,6 @@ export const getTodoList = (req, res, ctx) => {
   return res(ctx.status(200), ctx.json(data));
 };
 
-export const getTodo = (req, res, ctx) => {
-  const id = parseInt(req.params.id);
-  const target = data.find((todo) => todo.id === id);
-  if (!target) return;
-  return res(ctx.status(200), ctx.json(target));
-};
-
 export const editTodo = (req, res, ctx) => {
   if (!req.body.hasOwnProperty("id")) return;
   const id = parseInt(req.params.id);
@@ -32,6 +25,7 @@ export const editTodo = (req, res, ctx) => {
   if (!target) return;
   target.title = req.body.title;
   target.content = req.body.content;
+  target.tag = req.body.tag;
   return res(ctx.status(200), ctx.json(data));
 };
 
