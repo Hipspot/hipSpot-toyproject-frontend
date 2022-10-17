@@ -21,8 +21,8 @@ const todosWithDate = selectorFamily({
         const parsedCreatedAt = Date.parse(todo.created_at);
 
         if (
-          parsedFrom < parsedCreatedAt &&
-          parsedCreatedAt < parsedTo + 86399999
+          parsedFrom <= parsedCreatedAt &&
+          parsedCreatedAt < parsedTo + 86400000
         ) {
           todos.push(todo);
         }
