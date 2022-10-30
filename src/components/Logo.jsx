@@ -4,7 +4,6 @@ const Logo = styled.div`
   width: 175px;
   height: 40px;
   margin-top: 4px;
-  margin-bottom: 24px;
   border-radius: 8px;
   background-color: #e44269;
   display: flex;

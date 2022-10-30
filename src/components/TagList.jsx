@@ -5,7 +5,6 @@ export const TagList = styled.div`
   height: 75px;
   display: flex;
   align-items: center;
-  overflow-x: scroll;
   padding-left: 16px;
   gap: 12px;
   -ms-overflow-style: none; /* IE and Edge */
