@@ -10,6 +10,7 @@ import useDeLeteTodo from "./hooks/useDeleteTodo";
 import todoWithId from "./recoil/todoWithId";
 import todosWithTags from "./recoil/todosWithTags";
 import todosWithDate from "./recoil/todosWithDate";
+import todosWithTagsAndDate from "./recoil/todosWithTagsAndDate";
 
 function App() {
   const data = useRecoilValue(todoListAtom);
@@ -20,7 +21,12 @@ function App() {
   const getTodosWithDate = useRecoilValue(
     todosWithDate(["2022-10-04", "2022-10-25"])
   );
-  console.log(getTodo);
+  console.log("getTodo", getTodo);
+
+  const getTodosWithTagAndDate = useRecoilValue(
+    todosWithTagsAndDate([["개발", "디자인"], "2022-10-04", "2022-10-05"])
+  );
+  console.log("getTodosWithTagAndDate", getTodosWithTagAndDate);
 
   const refreshTodoList = useRefreshTodoList();
 
