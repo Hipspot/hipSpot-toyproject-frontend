@@ -19,13 +19,13 @@ Hipspot 프로젝트를 진행하기 전 팀원들과 간단히 협업해봅니�
 
 ## Mocking Apis
 
-| 구분          | 도메인 | uri       | method | body | response |
+| 종류          | 도메인 | uri       | method | body | response |
 | ------------- | ------ | --------- | ------ | ---- | -------- |
-| 투두 추가     | Todo   | /todo     | POST   | Todo | Todo     |
-| 투두목록 조회 | Todo   | /todo     | GET    | null | Todo[]   |
-| 투두 조회     | Todo   | /todo/:id | GET    | null | Todo     |
-| 투두 수정     | Todo   | /todo/:id | PATCH  | Todo | Todo     |
-| 투두 삭제     | Todo   | /todo/:id | DELETE | null | null     |
+| 투두목록 조회  | Todo   | /todo     | GET    | null | Todo[]   |
+| 투두 추가     | Todo   | /todo     | POST   | Todo | Todo[]     |
+| 투두 수정     | Todo   | /todo/:id | PATCH  | Todo | Todo[]     |
+| 투두 토글     | Todo   | /todo/:id | PATCH  | null | Todo[]     |
+| 투두 삭제     | Todo   | /todo/:id | DELETE | null | Todo[]     |
 
 ### Response Type
 
