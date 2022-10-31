@@ -18,10 +18,9 @@ const todosWithTags = selectorFamily({
       const todos = [];
 
       todoList.forEach((todo) => {
-        for (let i = 0; i < tags.length; i++) {
-          if (!todo.tag.includes(tags[i])) return;
+        if (todo.tag.some((item) => tags.includes(item))) {
+          todos.push(todo);
         }
-        todos.push(todo);
       });
 
       return todos;
