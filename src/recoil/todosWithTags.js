@@ -2,6 +2,10 @@ import { selectorFamily } from "recoil";
 import todoListAtom from "./todoListAtom";
 
 /**
+ * @description
+ * - 빈 배열 입력 시 전체 투두리스트 반환
+ * - 여러 태그 입력 시 그중 하나라도 포함하는 모든 todo 반환
+ *
  * @example
  * const [tags, setTags] = useState([]);
  * const getTodosWithTags = useRecoilValue(todosWithTags(tags));
@@ -12,9 +16,9 @@ const todosWithTags = selectorFamily({
   get:
     (tags) =>
     ({ get }) => {
-      if (!tags.length) return [];
-
       const todoList = get(todoListAtom);
+      if (!tags.length) return todoList;
+
       const todos = [];
 
       todoList.forEach((todo) => {
