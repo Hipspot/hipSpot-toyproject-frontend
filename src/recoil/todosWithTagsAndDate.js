@@ -17,19 +17,21 @@ const todosWithTagsAndDate = selectorFamily({
     ([tags, from, to]) =>
     ({ get }) => {
       const todoList = get(todoListAtom);
-      if (!tags.length) return todoList;
-
       const todosWithTags = [];
       const todos = [];
 
       const parsedFrom = Date.parse(from);
       const parsedTo = Date.parse(to);
 
-      todoList.forEach((todo) => {
-        if (todo.tag.some((item) => tags.includes(item))) {
-          todosWithTags.push(todo);
-        }
-      });
+      if (tags.length > 0) {
+        todoList.forEach((todo) => {
+          if (todo.tag.some((item) => tags.includes(item))) {
+            todosWithTags.push(todo);
+          }
+        });
+      } else {
+        todosWithTags.push(...todoList);
+      }
 
       todosWithTags.forEach((todo) => {
         const parsedCreatedAt = Date.parse(todo.created_at);
