@@ -24,7 +24,7 @@ function App() {
   console.log("getTodo", getTodo);
 
   const getTodosWithTagAndDate = useRecoilValue(
-    todosWithTagsAndDate([["개발", "디자인"], "2022-10-04", "2022-10-05"])
+    todosWithTagsAndDate([["기획", "디자인"], "2022-10-04", "2022-10-05"])
   );
   console.log("getTodosWithTagAndDate", getTodosWithTagAndDate);
 
@@ -64,7 +64,7 @@ function App() {
 
       <button
         onClick={() =>
-          createTodo("new todo title", "new todo content", ["개발", "FE"])
+          createTodo("new todo title", "new todo content", ["기획", "FE"])
         }
       >
         투두 추가
@@ -76,10 +76,14 @@ function App() {
       <p>
         selector todosWithTags: {getTodosWithTags.map((todo) => todo.title)}
       </p>
-      <button onClick={() => setTags(["개발"])}>todosWithTags "개발"</button>
-      <button onClick={() => setTags(["FE", "개발"])}>
-        todosWithTags "FE", "개발"
+      <button onClick={() => setTags(["기획"])}>todosWithTags "기획"</button>
+      <button onClick={() => setTags(["FE", "기획"])}>
+        todosWithTags "FE", "기획"
       </button>
+      <button onClick={() => setTags(["기획", "디자인", "FE", "BE", "Mobile"])}>
+        todosWithTags "기획", "디자인", "FE", "BE", "Mobile"
+      </button>
+      <button onClick={() => setTags([])}>todosWithTags empty array</button>
       {getTodosWithDate.map((todo) => todo.title)}
     </>
   );
