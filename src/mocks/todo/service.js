@@ -1,5 +1,5 @@
 import data from "./data";
-let n = 3;
+let n = 7;
 
 export const createTodo = (req, res, ctx) => {
   data.push({
