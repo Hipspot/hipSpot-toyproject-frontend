@@ -30,7 +30,7 @@ const todosWithTagsAndDate = selectorFamily({
           }
         });
       } else {
-        todosWithTags.push(...todoList);
+        return [];
       }
 
       todosWithTags.forEach((todo) => {
