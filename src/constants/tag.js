@@ -10,42 +10,35 @@ export const tags = [
     color: "#E44269",
   },
   {
-    name: "#개발",
+    name: "#FE",
     backgroundColor: "#E5FDF6",
     color: "#14A87B",
   },
   {
-    name: "#FE",
-    backgroundColor: "",
-    color: "#",
-  },
-  {
     name: "#BE",
-    backgroundColor: "",
-    color: "#",
+    backgroundColor: "#FDE8D4",
+    color: "#F77904",
   },
   {
-    name: "#iOS",
-    backgroundColor: "",
-    color: "#",
-  },
-  {
-    name: "#AOS",
-    backgroundColor: "",
-    color: "",
+    name: "#Mobile",
+    backgroundColor: "#EFE3F5",
+    color: "#8C0AC9",
   },
 ];
 
 export default function getTagColor(tagName) {
   switch (tagName) {
-    case "#개발":
-      return "#E9FBFD";
     case "#기획":
-      return "#E9FBFD";
+      return "#06ADC4";
+    case "#디자인":
+      return "#E44269";
     case "#FE":
-      return "#E9FBFD";
+      return "#14A87B";
     case "#BE":
-      return "#E9FBFD";
+      return "#F77904";
+    case "Mobile":
+      return "#8C0AC9";
+
     default:
       return "#E9FBFD";
   }

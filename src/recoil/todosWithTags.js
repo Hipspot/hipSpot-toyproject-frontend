@@ -17,7 +17,7 @@ const todosWithTags = selectorFamily({
     (tags) =>
     ({ get }) => {
       const todoList = get(todoListAtom);
-      if (!tags.length) return todoList;
+      if (!tags.length) return [];
 
       const todos = [];
 

@@ -37,7 +37,7 @@ function App() {
           showDateDisplay={false}
         />
       </Calendar>
-      <Section>
+      <Section style={{ position: "sticky", top: 0 }}>
         <TagList>
           {tags.map((tag) => (
             <Tag>{tag.name}</Tag>
@@ -47,7 +47,7 @@ function App() {
       <Section>
         <CardList>
           {tags.map((tag) => (
-            <Card color={tag.color}>
+            <Card color={tag.color} backgroundColor={tag.backgroundColor}>
               <div className="left">
                 <input type="checkbox" />
               </div>
@@ -119,6 +119,10 @@ const Calendar = styled.div`
   /* 현재날짜 밑줄 */
   .rdrDayToday .rdrDayNumber span:after {
     background-color: #e44269;
+  }
+
+  .CalendarDay__selcted {
+    border-radius: 90%;
   }
 `;
 

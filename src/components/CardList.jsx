@@ -48,13 +48,13 @@ export const Card = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e9fbfd;
+    background-color: ${(props) => props.backgroundColor};
     border-radius: 4px;
 
     font-family: "Apple SD Gothic Neo";
     font-weight: 600;
     font-size: 12px;
     line-height: 16px;
-    color: #06adc4;
+    color: ${(props) => props.color};
   }
 `;
