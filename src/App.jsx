@@ -1,23 +1,16 @@
 import styled from "styled-components";
-import { Todo, TodoList } from "./components/CardList";
+import TodoList from "./components/TodoList";
 import { Tag, TagList } from "./components/TagList";
-import GlobalStyle from "./GlobalStyle";
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
 import { useState } from "react";
-import { dateToLocalString } from "./utils/date";
 import { useEffect } from "react";
-import {
-  getTagBackgroundColor,
-  getTagColor,
-  hipTag,
-  tagToLocaleString,
-} from "./constants/tag";
+import { hipTag } from "./constants/tag";
 import todosWithTagsAndDate from "./recoil/todosWithTagsAndDate";
 import { useRecoilValue } from "recoil";
-import { Checkbox, CheckboxChecked, Dots, Logo } from "./assets/svg";
-import useToggleTodo from "./hooks/useToggleTodo";
+import GlobalStyle from "./GlobalStyle";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import { Logo } from "./assets/svg";
 
 function App() {
   const [tags, setTags] = useState(
@@ -26,7 +19,6 @@ function App() {
       selected: true,
     }))
   );
-  const toggleTodo = useToggleTodo();
 
   const [selectDate, setSelectDate] = useState([
     {
@@ -52,10 +44,6 @@ function App() {
     );
   };
 
-  const onTodoComplete = (todo) => {
-    toggleTodo(todo.id);
-  };
-
   useEffect(() => {
     console.log(tags.filter((tag) => tag.selected).map((tag) => tag.name));
     console.log(todos);
@@ -65,7 +53,6 @@ function App() {
     <Wrapper>
       <GlobalStyle />
       <Logo className="logo" />
-
       <Calendar>
         <DateRangePicker
           className="dateRangePicker"
@@ -88,34 +75,7 @@ function App() {
         </TagList>
       </Section>
       <Section>
-        <TodoList>
-          {todos.map((todo) => (
-            <Todo
-              key={todo.id}
-              color={getTagColor(todo.tag)}
-              backgroundColor={getTagBackgroundColor(todo.tag)}
-              onClick={() => onTodoComplete(todo)}
-            >
-              <div className="left">
-                {todo.isComplete ? <CheckboxChecked /> : <Checkbox />}
-              </div>
-              <div className="middle">
-                <h1>{todo.title}</h1>
-                <div className="tag">#{tagToLocaleString(todo.tag)}</div>
-                <p className="date">
-                  {dateToLocalString(new Date(todo.modifiedDate))}
-                </p>
-              </div>
-              <div className="right">
-                <Dots
-                  onClick={(e) => {
-                    e.stopPropagation();
-                  }}
-                />
-              </div>
-            </Todo>
-          ))}
-        </TodoList>
+        <TodoList todos={todos} />
       </Section>
     </Wrapper>
   );
