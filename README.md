@@ -34,8 +34,8 @@ type Todo = {
   id: number;
   title: string;
   content: string;
-  created_at: Date;
-  status: "todo" | "done";
+  modifiedDate: Date;
+  isConplete: Boolean;
   tag: Tag[];
 };
 

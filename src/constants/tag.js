@@ -1,45 +1,81 @@
-export const tags = [
+export const hipTag = [
   {
-    name: "#기획",
-    backgroundColor: "#E9FBFD",
-    color: "#06ADC4",
+    name: "global",
+    localeName: "공통",
   },
   {
-    name: "#디자인",
-    backgroundColor: "#FEF0F4",
-    color: "#E44269",
+    name: "pm",
+    localeName: "기획",
   },
   {
-    name: "#FE",
-    backgroundColor: "#E5FDF6",
-    color: "#14A87B",
+    name: "design",
+    localeName: "디자인",
   },
   {
-    name: "#BE",
-    backgroundColor: "#FDE8D4",
-    color: "#F77904",
+    name: "fe",
+    localeName: "FE",
   },
   {
-    name: "#Mobile",
-    backgroundColor: "#EFE3F5",
-    color: "#8C0AC9",
+    name: "be",
+    localeName: "BE",
+  },
+  {
+    name: "modile",
+    localeName: "모바일",
   },
 ];
 
-export default function getTagColor(tagName) {
+export const getTagColor = (tagName) => {
   switch (tagName) {
-    case "#기획":
+    case "global":
       return "#06ADC4";
-    case "#디자인":
+    case "pm":
+      return "#06ADC4";
+    case "design":
       return "#E44269";
-    case "#FE":
+    case "fe":
       return "#14A87B";
-    case "#BE":
+    case "be":
       return "#F77904";
-    case "Mobile":
+    case "mobile":
       return "#8C0AC9";
-
     default:
       return "#E9FBFD";
   }
-}
+};
+
+export const getTagBackgroundColor = (tagName) => {
+  switch (tagName) {
+    case "global":
+      return "#E9FBFD";
+    case "pm":
+      return "#E9FBFD";
+    case "design":
+      return "#FEF0F4";
+    case "fe":
+      return "#E5FDF6";
+    case "be":
+      return "#FDE8D4";
+    case "mobile":
+      return "#EFE3F5";
+    default:
+      return "#E9FBFD";
+  }
+};
+
+export const tagToLocaleString = (tag) => {
+  switch (tag) {
+    case "pm":
+      return "기획";
+    case "fe":
+      return "FE";
+    case "be":
+      return "BE";
+    case "global":
+      return "공통";
+    case "mobile":
+      return "모바일";
+    case "design":
+      return "디자인";
+  }
+};

@@ -6,8 +6,8 @@ export const createTodo = (req, res, ctx) => {
     id: n,
     title: req.body.title,
     content: req.body.content,
-    created_at: req.body.created_at,
-    status: req.body.status,
+    modifiedDate: req.body.modifiedDate,
+    isComplete: req.body.isComplete,
     tag: req.body.tag,
   });
   n++;
@@ -34,8 +34,7 @@ export const toggleTodo = (req, res, ctx) => {
   const id = parseInt(req.params.id);
   const target = data.find((todo) => todo.id === id);
   if (!target) return res(ctx.status(404));
-  if (target.status === "todo") target.status = "done";
-  else target.status = "todo";
+  target.isComplete = !target.isComplete;
   return res(ctx.status(200), ctx.json(data));
 };
 

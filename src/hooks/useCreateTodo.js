@@ -20,8 +20,8 @@ export default function useCreateTodo() {
     const response = await createTodoApi({
       title,
       content,
-      created_at: new Date().toISOString(),
-      status: "todo",
+      modifiedDate: new Date().toISOString(),
+      isComplete: "todo",
       tag,
     });
     setTodoList(response);

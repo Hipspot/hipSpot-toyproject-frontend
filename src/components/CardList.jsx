@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardList = styled.div`
+export const TodoList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -8,7 +8,7 @@ export const CardList = styled.div`
   padding: 0 16px;
 `;
 
-export const Card = styled.div`
+export const Todo = styled.div`
   width: 100%;
   height: 84px;
   display: flex;
@@ -17,16 +17,9 @@ export const Card = styled.div`
   padding: 16px;
   gap: 8px;
   border-radius: 8px;
+  cursor: pointer;
 
-  .left input {
-    accent-color: #e44269;
-    border: 1px solid #e6e6e6;
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-  }
-
-  .right {
+  .middle {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -43,7 +36,7 @@ export const Card = styled.div`
   }
 
   .tag {
-    padding: 0 4px;
+    padding: 4px 8px;
     height: 24px;
     display: flex;
     justify-content: center;
@@ -56,5 +49,17 @@ export const Card = styled.div`
     font-size: 12px;
     line-height: 16px;
     color: ${(props) => props.color};
+  }
+
+  .date {
+    margin-top: 4px;
+    font-family: "Apple SD Gothic Neo";
+    font-weight: 400;
+    font-size: 12px;
+    color: #999999;
+  }
+
+  .right {
+    cursor: pointer;
   }
 `;

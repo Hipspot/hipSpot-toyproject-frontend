@@ -18,7 +18,7 @@ const todosWithDate = selectorFamily({
       const parsedTo = Date.parse(to);
 
       todoList.forEach((todo) => {
-        const parsedCreatedAt = Date.parse(todo.created_at);
+        const parsedCreatedAt = Date.parse(todo.modifiedDate);
 
         if (
           parsedFrom <= parsedCreatedAt &&
