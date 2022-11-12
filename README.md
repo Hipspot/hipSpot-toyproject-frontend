@@ -41,3 +41,23 @@ type Todo = {
 
 type Tag = "기획" | "디자인" | "FE" | "BE" | "Mobile";
 ```
+
+## Member
+<table>
+  <tr align="center">
+    <td>황인서</td>
+    <td>오승태</td>
+    <td>이효린</td>
+  </tr>
+  <tr>
+     <td align="center">
+        <a href="https://github.com/sjsjsj1246"><img src="https://avatars.githubusercontent.com/u/24623403?v=4" width="150px" alt="이효린"/><br /></a>
+     </td>
+     <td align="center">
+        <a href="https://github.com/yeoularu"><img src="https://avatars.githubusercontent.com/u/69510981?v=4" width="150px" alt="황인서"/><br /></a>
+     </td>
+     <td align="center">
+        <a href="https://github.com/hyorish03"><img src="https://avatars.githubusercontent.com/u/108210492?v=4" width="150px" alt="황인서"/><br /></a>
+     </td>
+  <tr>
+</table>
