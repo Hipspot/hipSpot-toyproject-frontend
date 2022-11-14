@@ -19,13 +19,13 @@ Hipspot 프로젝트를 진행하기 전 팀원들과 간단히 협업해봅니�
 
 ## Mocking Apis
 
-| 종류          | 도메인 | uri       | method | body | response |
-| ------------- | ------ | --------- | ------ | ---- | -------- |
-| 투두목록 조회 | Todo   | /todo     | GET    | null | Todo[]   |
-| 투두 추가     | Todo   | /todo     | POST   | Todo | Todo[]   |
-| 투두 수정     | Todo   | /todo/:id | PATCH  | Todo | Todo[]   |
-| 투두 토글     | Todo   | /todo/:id | PATCH  | null | Todo[]   |
-| 투두 삭제     | Todo   | /todo/:id | DELETE | null | Todo[]   |
+| 종류          | 도메인 | uri             | method | body                               | response |
+| ------------- | ------ | --------------- | ------ | ---------------------------------- | -------- |
+| 투두목록 조회 | Todo   | /todo           | GET    | {tags:Tag[], start:Date, end:Date} | Todo[]   |
+| 투두 추가     | Todo   | /todo           | POST   | Todo                               | Todo     |
+| 투두 수정     | Todo   | /todo/:id       | PATCH  | Todo                               | Todo     |
+| 투두 토글     | Todo   | /todo/toggle:id | PATCH  | null                               | Todo     |
+| 투두 삭제     | Todo   | /todo/:id       | DELETE | null                               | null     |
 
 ### Response Type
 
@@ -34,12 +34,12 @@ type Todo = {
   id: number;
   title: string;
   content: string;
-  created_at: Date;
-  status: "todo" | "done";
+  modifiedDate: Date;
+  isConplete: Boolean;
   tag: Tag[];
 };
 
-type Tag = "기획" | "디자인" | "FE" | "BE" | "Mobile";
+type Tag = "global" | "design" | "fe" | "be" | "mobile";
 ```
 
 ## Member

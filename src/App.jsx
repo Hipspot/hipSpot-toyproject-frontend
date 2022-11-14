@@ -1,37 +1,65 @@
 import styled from "styled-components";
-import { Card, CardList } from "./components/CardList";
-import Logo from "./components/Logo";
+import TodoList from "./components/TodoList";
 import { Tag, TagList } from "./components/TagList";
-import { tags } from "./constants/tag";
-import GlobalStyle from "./GlobalStyle";
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
-import { addDays } from "date-fns";
 import { useState } from "react";
-import { dateToLocalString } from "./utils/date";
+import { useEffect } from "react";
+import { hipTag } from "./constants/tag";
+import todosWithTagsAndDate from "./recoil/todosWithTagsAndDate";
+import { useRecoilValue } from "recoil";
+import GlobalStyle from "./GlobalStyle";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import { Logo } from "./assets/svg";
 
 function App() {
-  const [state, setState] = useState([
+  const [tags, setTags] = useState(
+    hipTag.map((tags) => ({
+      ...tags,
+      selected: true,
+    }))
+  );
+
+  const [selectDate, setSelectDate] = useState([
     {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 1),
+      startDate: new Date("2022-10-04"),
+      endDate: new Date("2022-10-06"),
       key: "selection",
     },
   ]);
 
+  const todos = useRecoilValue(
+    todosWithTagsAndDate([
+      tags.filter((tag) => tag.selected).map((tag) => tag.name),
+      selectDate[0].startDate.toISOString(),
+      selectDate[0].endDate.toISOString(),
+    ])
+  );
+
+  const onTagClick = (tag) => {
+    setTags(
+      tags.map((item) =>
+        item.name === tag.name ? { ...item, selected: !item.selected } : item
+      )
+    );
+  };
+
+  useEffect(() => {
+    console.log(tags.filter((tag) => tag.selected).map((tag) => tag.name));
+    console.log(todos);
+  }, [selectDate, tags]);
+
   return (
     <Wrapper>
       <GlobalStyle />
-      <Logo>TODO LIST</Logo>
-
+      <Logo className="logo" />
       <Calendar>
         <DateRangePicker
           className="dateRangePicker"
           editableDateInputs={true}
-          onChange={(item) => setState([item.selection])}
+          onChange={(item) => setSelectDate([item.selection])}
           moveRangeOnFirstSelection={false}
-          ranges={state}
+          ranges={selectDate}
           months={1}
           direction="horizontal"
           showDateDisplay={false}
@@ -40,25 +68,14 @@ function App() {
       <Section style={{ position: "sticky", top: 0 }}>
         <TagList>
           {tags.map((tag) => (
-            <Tag>{tag.name}</Tag>
+            <Tag key={tag.name} onClick={() => onTagClick(tag)} tag={tag}>
+              #{tag.localeName}
+            </Tag>
           ))}
         </TagList>
       </Section>
       <Section>
-        <CardList>
-          {tags.map((tag) => (
-            <Card color={tag.color} backgroundColor={tag.backgroundColor}>
-              <div className="left">
-                <input type="checkbox" />
-              </div>
-              <div className="right">
-                <h1>힙스팟 기획</h1>
-                <div className="tag">{tag.name}</div>
-                <p>{dateToLocalString(new Date().toISOString())}</p>
-              </div>
-            </Card>
-          ))}
-        </CardList>
+        <TodoList todos={todos} />
       </Section>
     </Wrapper>
   );
@@ -72,6 +89,11 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .logo {
+    margin-top: 4px;
+    box-shadow: 0px 4px 16px 0px #d0113f29;
+  }
 `;
 
 const Calendar = styled.div`

@@ -4,7 +4,6 @@ import todoListAtom from "./todoListAtom";
 /**
  * @description
  * 입력 배열의 첫째 요소: tags = [tag1, tag2, ...]
- * - 빈 배열 입력 시 전체 투두리스트 반환 (tag가 없는 todo 포함)
  * - 여러 태그 입력 시 그중 하나라도 포함하는 모든 todo 반환
  *
  * @example
@@ -16,25 +15,16 @@ const todosWithTagsAndDate = selectorFamily({
   get:
     ([tags, from, to]) =>
     ({ get }) => {
-      const todoList = get(todoListAtom);
-      const todosWithTags = [];
+      const todoList = get(todoListAtom).filter((todo) =>
+        tags.includes(todo.tag)
+      );
       const todos = [];
 
       const parsedFrom = Date.parse(from);
       const parsedTo = Date.parse(to);
 
-      if (tags.length > 0) {
-        todoList.forEach((todo) => {
-          if (todo.tag.some((item) => tags.includes(item))) {
-            todosWithTags.push(todo);
-          }
-        });
-      } else {
-        return [];
-      }
-
-      todosWithTags.forEach((todo) => {
-        const parsedCreatedAt = Date.parse(todo.created_at);
+      todoList.forEach((todo) => {
+        const parsedCreatedAt = Date.parse(todo.modifiedDate);
 
         if (
           parsedFrom <= parsedCreatedAt &&

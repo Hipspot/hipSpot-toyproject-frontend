@@ -19,12 +19,12 @@ export const Tag = styled.div`
   padding: 0 12px;
   height: 32px;
   border-radius: 20px;
-  border: 1px solid #cccccc;
+  border: 1px solid ${(props) => (props.tag.selected ? "#E44269" : "#cccccc")};
   font-family: "Apple SD Gothic Neo";
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  color: #999999;
+  color: ${(props) => (props.tag.selected ? "#E44269" : "#999999")};
   display: flex;
   justify-content: center;
   align-items: center;

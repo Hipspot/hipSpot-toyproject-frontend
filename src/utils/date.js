@@ -1,6 +1,4 @@
 export const dateToLocalString = (dateString) => {
-  console.log(dateString);
-  console.log(new Date(dateString));
   const date = new Date(dateString);
   return (
     date.getFullYear() +
