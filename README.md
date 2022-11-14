@@ -42,7 +42,51 @@ type Todo = {
 type Tag = "global" | "design" | "fe" | "be" | "mobile";
 ```
 
+### WebView Commiunication Structure
+
+```ts
+type FlutterToWebView = {
+  type: "createTodo" | "editTodo";
+  data: any;
+};
+
+type WebViewToFlutter = {
+   type: "openEditModal";
+   data: any;
+};
+
+const createTodoData: FlutterToWebView = {
+   type: "createTodo",
+   data: {
+      title: string,
+      content: string,
+      tag: Tag[],
+   }
+}
+
+const editTodoData: FlutterToWebView = {
+   type: "editTodo",
+   data: {
+      id: 1,
+      title: "마라탕먹기",
+      content: "맛있다",
+      tag: "fe",
+   }
+}
+
+const openEditModalData: WebViewToFlutter = {
+   type: "openEditModal",
+   data: {
+      id: 2,
+      title: "마라탕먹기",
+      content: "맛있겠다",
+      tag: "fe",
+   }
+}
+```
+
 ## Member
+
 <table>
   <tr align="center">
     <td>황인서</td>

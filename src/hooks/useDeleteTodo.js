@@ -1,4 +1,4 @@
-import { useSetRecoilState } from "recoil";
+import { useRecoilRefresher_UNSTABLE, useSetRecoilState } from "recoil";
 import { deleteTodo as deleteTodoApi } from "../apis/todo";
 import todoListAtom from "../recoil/todoListAtom";
 
@@ -14,11 +14,11 @@ import todoListAtom from "../recoil/todoListAtom";
  * deleteTodo(4)
  */
 export default function useDeleteTodo() {
-  const setTodoList = useSetRecoilState(todoListAtom);
+  const refresh = useRecoilRefresher_UNSTABLE(todoListAtom);
 
   const deleteTodo = async (id) => {
-    const response = await deleteTodoApi(id);
-    setTodoList(response);
+    await deleteTodoApi(id);
+    refresh();
   };
 
   return deleteTodo;

@@ -11,7 +11,7 @@ const todosWithDate = selectorFamily({
   get:
     ([from, to]) =>
     ({ get }) => {
-      const todoList = get(todoListAtom);
+      const todoList = get(todoListAtom).todoList;
       const todos = [];
 
       const parsedFrom = Date.parse(from);

@@ -14,17 +14,17 @@ import todoListAtom from "../recoil/todoListAtom";
  * createTodo("투두제목", "투두내용", ["기획", "디자인"])
  */
 export default function useCreateTodo() {
-  const setTodoList = useSetRecoilState(todoListAtom);
+  const refresh = useRecoilRefresher_UNSTABLE(todoListAtom);
 
   const createTodo = async (title, content, tag) => {
-    const response = await createTodoApi({
+    await createTodoApi({
       title,
       content,
       modifiedDate: new Date().toISOString(),
       isComplete: "todo",
       tag,
     });
-    setTodoList(response);
+    refresh();
   };
 
   return createTodo;

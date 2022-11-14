@@ -3,7 +3,6 @@ import TodoList from "./components/TodoList";
 import { Tag, TagList } from "./components/TagList";
 import { DateRangePicker } from "react-date-range";
 import { useState } from "react";
-import { useEffect } from "react";
 import { hipTag } from "./constants/tag";
 import todosWithTagsAndDate from "./recoil/todosWithTagsAndDate";
 import { useRecoilValue } from "recoil";
@@ -11,6 +10,8 @@ import GlobalStyle from "./GlobalStyle";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { Logo } from "./assets/svg";
+import { dateToServerString } from "./utils/date";
+import React from "react";
 
 function App() {
   const [tags, setTags] = useState(
@@ -22,8 +23,8 @@ function App() {
 
   const [selectDate, setSelectDate] = useState([
     {
-      startDate: new Date("2022-10-04"),
-      endDate: new Date("2022-10-06"),
+      startDate: new Date(),
+      endDate: new Date(),
       key: "selection",
     },
   ]);
@@ -31,8 +32,8 @@ function App() {
   const todos = useRecoilValue(
     todosWithTagsAndDate([
       tags.filter((tag) => tag.selected).map((tag) => tag.name),
-      selectDate[0].startDate.toISOString(),
-      selectDate[0].endDate.toISOString(),
+      dateToServerString(selectDate[0].startDate),
+      dateToServerString(selectDate[0].endDate),
     ])
   );
 
@@ -43,11 +44,6 @@ function App() {
       )
     );
   };
-
-  useEffect(() => {
-    console.log(tags.filter((tag) => tag.selected).map((tag) => tag.name));
-    console.log(todos);
-  }, [selectDate, tags]);
 
   return (
     <Wrapper>
