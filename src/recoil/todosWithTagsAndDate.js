@@ -15,7 +15,7 @@ const todosWithTagsAndDate = selectorFamily({
   get:
     ([tags, from, to]) =>
     ({ get }) => {
-      let todoList = get(todoListAtom).filter((todo) =>
+      const todoList = get(todoListAtom).filter((todo) =>
         tags.includes(todo.tag)
       );
       const todos = [];
