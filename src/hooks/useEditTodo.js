@@ -1,4 +1,4 @@
-import { useRecoilState } from "recoil";
+import { useRecoilRefresher_UNSTABLE, useRecoilState } from "recoil";
 import { editTodo as editTodoApi } from "../apis/todo";
 import todoListAtom from "../recoil/todoListAtom";
 
@@ -14,7 +14,9 @@ import todoListAtom from "../recoil/todoListAtom";
  * editTodo(3, "투두제목", "투두내용", ["기획", "디자인"])
  */
 export default function useEditTodo() {
-  const [todoList, setTodoList] = useRecoilState(todoListAtom);
+  const todoList = useRecoilState(todoListAtom);
+
+  const refresh = useRecoilRefresher_UNSTABLE(todoListAtom);
 
   const editTodo = async (id, title, content, tag) => {
     const target = await {
@@ -23,8 +25,8 @@ export default function useEditTodo() {
       content,
       tag,
     };
-    const response = await editTodoApi(target);
-    setTodoList(response);
+    await editTodoApi(target);
+    refresh();
   };
 
   return editTodo;

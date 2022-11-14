@@ -5,6 +5,6 @@ export const todoHandlers = [
   rest.post("/todo", service.createTodo),
   rest.get("/todo", service.getTodoList),
   rest.patch("/todo/:id", service.editTodo),
-  rest.patch("/todo/:id", service.toggleTodo),
+  rest.patch("/todo/toggle/:id", service.toggleTodo),
   rest.delete("/todo/:id", service.deleteTodo),
 ];

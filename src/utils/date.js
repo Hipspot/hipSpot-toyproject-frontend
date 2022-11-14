@@ -9,3 +9,13 @@ export const dateToLocalString = (dateString) => {
     "일"
   );
 };
+
+export const dateToServerString = (date) => {
+  return (
+    date.getFullYear() +
+    "-" +
+    (date.getMonth() + 1).toString().padStart(2, "0") +
+    "-" +
+    date.getDate().toString().padStart(2, "0")
+  );
+};

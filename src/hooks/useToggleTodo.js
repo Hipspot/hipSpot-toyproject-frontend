@@ -1,4 +1,4 @@
-import { useSetRecoilState } from "recoil";
+import { useRecoilRefresher_UNSTABLE, useSetRecoilState } from "recoil";
 import { toggleTodo as toggleTodoApi } from "../apis/todo";
 import todoListAtom from "../recoil/todoListAtom";
 
@@ -14,11 +14,10 @@ import todoListAtom from "../recoil/todoListAtom";
  * toggleTodo(2)
  */
 export default function useToggleTodo() {
-  const setTodoList = useSetRecoilState(todoListAtom);
-
+  const refresh = useRecoilRefresher_UNSTABLE(todoListAtom);
   const toggleTodo = async (id) => {
-    const response = await toggleTodoApi(id);
-    setTodoList(response);
+    await toggleTodoApi(id);
+    refresh();
   };
 
   return toggleTodo;

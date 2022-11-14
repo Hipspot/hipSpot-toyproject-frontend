@@ -38,5 +38,6 @@
   },
   "msw": {
     "workerDirectory": "public"
-  }
+  },
+  "proxy": "https://hipspot-todo.endless-creation.com"
 }

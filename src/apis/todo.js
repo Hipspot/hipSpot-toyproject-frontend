@@ -5,6 +5,7 @@ export const createTodo = async (todo) =>
 export const getTodoList = async () => (await axios.get("/todo")).data;
 export const editTodo = async (todo) =>
   (await axios.patch(`/todo/${todo.id}`, todo)).data;
-export const toggleTodo = async (id) => (await axios.patch(`/todo/${id}`)).data;
+export const toggleTodo = async (id) =>
+  (await axios.patch(`/todo/toggle/${id}`)).data;
 export const deleteTodo = async (id) =>
   (await axios.delete(`/todo/${id}`)).data;

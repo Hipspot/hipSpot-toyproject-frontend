@@ -15,7 +15,7 @@ const todosWithTags = selectorFamily({
   get:
     (tags) =>
     ({ get }) =>
-      get(todoListAtom).filter((todo) => tags.includes(todo.tag)),
+      get(todoListAtom).todoList.filter((todo) => tags.includes(todo.tag)),
 });
 
 export default todosWithTags;
