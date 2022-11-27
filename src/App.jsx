@@ -2,7 +2,7 @@ import styled from "styled-components";
 import TodoList from "./components/TodoList";
 import { Tag, TagList } from "./components/TagList";
 import { DateRangePicker } from "react-date-range";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { hipTag } from "./constants/tag";
 import todosWithTagsAndDate from "./recoil/todosWithTagsAndDate";
 import { useRecoilValue } from "recoil";
@@ -12,8 +12,11 @@ import "react-date-range/dist/theme/default.css";
 import { Logo } from "./assets/svg";
 import { dateToServerString } from "./utils/date";
 import React from "react";
+import fromFlutter from "./utils/fromFlutter";
+import useReFreshTodo from "./hooks/useRefreshTodo";
 
 function App() {
+  const refresh = useReFreshTodo();
   const [tags, setTags] = useState(
     hipTag.map((tags) => ({
       ...tags,
@@ -44,6 +47,13 @@ function App() {
       )
     );
   };
+
+  useEffect(() => {
+    window.fromFlutter = async (message) => {
+      await fromFlutter(message);
+      await (async () => refresh())();
+    };
+  }, []);
 
   return (
     <Wrapper>
