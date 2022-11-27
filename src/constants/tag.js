@@ -20,7 +20,7 @@ export const hipTag = [
     localeName: "BE",
   },
   {
-    name: "modile",
+    name: "mobile",
     localeName: "모바일",
   },
 ];
